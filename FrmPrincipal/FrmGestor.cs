@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -14,10 +15,17 @@ namespace FrmPrincipal
 {
     public partial class FrmGestor : Form
     {
+        private Articulos articulo = null;
         public FrmGestor()
         {
             InitializeComponent();
             cargarImagen("");
+        }
+        public FrmGestor(Articulos modificado)
+        {
+            InitializeComponent();
+            Text = "Modificar Artículo";
+            articulo = modificado;
         }
         private void FrmGestor_Load(object sender, EventArgs e)
         {
@@ -31,6 +39,18 @@ namespace FrmPrincipal
                 cbxCategoria.DisplayMember = "Descripcion";
                 cbxMarca.ValueMember = "Id";
                 cbxMarca.DisplayMember = "Descripcion";
+
+                if(articulo != null)
+                {
+                    cbxCategoria.SelectedValue = articulo.Categoria.Id;
+                    cbxMarca.SelectedValue = articulo.Marca.Id;
+                    txbNombre.Text = articulo.Nombre;
+                    txbDescripcion.Text = articulo.Descripcion;
+                    txbPrecio.Text = articulo.Precio.ToString();
+                    txbUrlImagen.Text = articulo.ImagenUrl;
+                    cargarImagen(articulo.ImagenUrl);
+                    txbCodigo.Text = articulo.Codigo;
+                }
             }
             catch (Exception ex)
             {
@@ -39,10 +59,11 @@ namespace FrmPrincipal
         }
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            Articulos articulo = new Articulos();
             ArticulosNegocio negocio = new ArticulosNegocio();
             try
             {
+                if (articulo == null)
+                    articulo = new Articulos();
                 articulo.Categoria = (Categorias)cbxCategoria.SelectedItem;
                 articulo.Marca = (Marcas)cbxMarca.SelectedItem;
                 articulo.Nombre = txbNombre.Text;
@@ -50,9 +71,12 @@ namespace FrmPrincipal
                 articulo.Precio = decimal.Parse(txbPrecio.Text);
                 articulo.ImagenUrl = txbUrlImagen.Text;
                 articulo.Codigo = txbCodigo.Text;
-                negocio.Agregar(articulo);
-                Close();
 
+                if(articulo.Id !=0)
+                    negocio.modificar(articulo);
+                else
+                    negocio.Agregar(articulo);
+                Close();
             }
             catch (Exception ex)
             {

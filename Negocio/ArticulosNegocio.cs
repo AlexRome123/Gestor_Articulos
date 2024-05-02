@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio;
@@ -16,7 +18,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("select a.Id, Codigo,Nombre,a.Descripcion,m.Descripcion Marca,c.Descripcion Categoria,ImagenUrl,Precio from articulos a,MARCAS m,CATEGORIAS c where a.IdMarca = m.Id and a.IdCategoria = c.Id");
+                datos.setearConsulta("select a.Id, Codigo,Nombre,a.Descripcion,m.Id IdMarca,m.Descripcion Marca,c.Id IdCategoria,c.Descripcion Categoria,ImagenUrl,Precio from articulos a,MARCAS m,CATEGORIAS c where a.IdMarca = m.Id and a.IdCategoria = c.Id");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -26,10 +28,11 @@ namespace Negocio
                     aux.Codigo = (string)datos.Lector["Codigo"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.Marca.Id = (int)datos.Lector["IdMarca"];
                     aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+                    aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
                     aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
-                    if (!(datos.Lector["ImagenUrl"] is DBNull))
-                        aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+                    aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
                     aux.Precio = (decimal)datos.Lector["Precio"];
 
                     lista.Add(aux);
@@ -64,6 +67,31 @@ namespace Negocio
             catch (Exception ex)
             {
 
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void modificar(Articulos modificado)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("update ARTICULOS set Codigo = @codigo,Nombre=@nombre,Descripcion=@descripcion,IdMarca=@marca,IdCategoria=@categoria,ImagenUrl=@imagen,Precio=@precio where Id=@id");
+                datos.setearParametro("@codigo",modificado.Codigo);
+                datos.setearParametro("@nombre",modificado.Nombre);
+                datos.setearParametro("@descripcion",modificado.Descripcion);
+                datos.setearParametro("@marca",modificado.Marca.Id);
+                datos.setearParametro("@categoria",modificado.Categoria.Id);
+                datos.setearParametro("@imagen",modificado.ImagenUrl);
+                datos.setearParametro("@precio",modificado.Precio);
+                datos.setearParametro("@id",modificado.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
             finally

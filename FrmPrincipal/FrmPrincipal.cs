@@ -78,5 +78,21 @@ namespace FrmPrincipal
             gestor.ShowDialog();
             cargar();
         }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if(dgvArticulos.CurrentRow != null)
+            {
+                Articulos seleccionado = (Articulos)dgvArticulos.CurrentRow.DataBoundItem;
+                FrmGestor gestor = new FrmGestor(seleccionado);
+                gestor.ShowDialog();
+                cargar();
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un Artículo");
+            }
+
+        }
     }
 }
