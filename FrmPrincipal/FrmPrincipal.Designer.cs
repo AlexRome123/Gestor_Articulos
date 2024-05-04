@@ -33,10 +33,9 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cmbCategoria = new System.Windows.Forms.ComboBox();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txbfiltro = new System.Windows.Forms.TextBox();
             this.txbDescripcionM = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txbNombreM = new System.Windows.Forms.TextBox();
@@ -44,8 +43,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.cmbMarca = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbArticulos)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvArticulos
@@ -75,7 +76,7 @@
             // btnAgregar
             // 
             this.btnAgregar.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.Location = new System.Drawing.Point(34, 53);
+            this.btnAgregar.Location = new System.Drawing.Point(45, 258);
             this.btnAgregar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(88, 23);
@@ -87,7 +88,7 @@
             // btnModificar
             // 
             this.btnModificar.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModificar.Location = new System.Drawing.Point(34, 96);
+            this.btnModificar.Location = new System.Drawing.Point(45, 301);
             this.btnModificar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(88, 23);
@@ -99,49 +100,44 @@
             // btnEliminar
             // 
             this.btnEliminar.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.Location = new System.Drawing.Point(34, 138);
+            this.btnEliminar.Location = new System.Drawing.Point(45, 343);
             this.btnEliminar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(88, 23);
             this.btnEliminar.TabIndex = 4;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
-            // comboBox1
+            // cmbCategoria
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(195, 252);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(140, 21);
-            this.comboBox1.TabIndex = 5;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(386, 252);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(140, 21);
-            this.comboBox2.TabIndex = 6;
+            this.cmbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCategoria.FormattingEnabled = true;
+            this.cmbCategoria.Location = new System.Drawing.Point(195, 252);
+            this.cmbCategoria.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.cmbCategoria.Name = "cmbCategoria";
+            this.cmbCategoria.Size = new System.Drawing.Size(172, 21);
+            this.cmbCategoria.TabIndex = 5;
+            this.cmbCategoria.Click += new System.EventHandler(this.cmbCategoria_Click);
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(743, 250);
+            this.btnBuscar.Location = new System.Drawing.Point(735, 250);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(88, 23);
+            this.btnBuscar.Size = new System.Drawing.Size(110, 23);
             this.btnBuscar.TabIndex = 7;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
-            // textBox1
+            // txbfiltro
             // 
-            this.textBox1.Location = new System.Drawing.Point(570, 253);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(131, 21);
-            this.textBox1.TabIndex = 8;
+            this.txbfiltro.Location = new System.Drawing.Point(555, 252);
+            this.txbfiltro.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txbfiltro.Name = "txbfiltro";
+            this.txbfiltro.Size = new System.Drawing.Size(172, 21);
+            this.txbfiltro.TabIndex = 8;
             // 
             // txbDescripcionM
             // 
@@ -150,12 +146,16 @@
             this.txbDescripcionM.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txbDescripcionM.Multiline = true;
             this.txbDescripcionM.Name = "txbDescripcionM";
+            this.txbDescripcionM.ReadOnly = true;
             this.txbDescripcionM.Size = new System.Drawing.Size(288, 134);
             this.txbDescripcionM.TabIndex = 9;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel1.Controls.Add(this.btnAgregar);
+            this.panel1.Controls.Add(this.btnModificar);
+            this.panel1.Controls.Add(this.btnEliminar);
             this.panel1.Location = new System.Drawing.Point(-7, -5);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel1.Name = "panel1";
@@ -169,6 +169,7 @@
             this.txbNombreM.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txbNombreM.Multiline = true;
             this.txbNombreM.Name = "txbNombreM";
+            this.txbNombreM.ReadOnly = true;
             this.txbNombreM.Size = new System.Drawing.Size(288, 49);
             this.txbNombreM.TabIndex = 11;
             // 
@@ -179,6 +180,7 @@
             this.txbPrecioM.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txbPrecioM.Multiline = true;
             this.txbPrecioM.Name = "txbPrecioM";
+            this.txbPrecioM.ReadOnly = true;
             this.txbPrecioM.Size = new System.Drawing.Size(288, 49);
             this.txbPrecioM.TabIndex = 12;
             // 
@@ -212,35 +214,45 @@
             this.label3.TabIndex = 15;
             this.label3.Text = "Descripción";
             // 
+            // cmbMarca
+            // 
+            this.cmbMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMarca.FormattingEnabled = true;
+            this.cmbMarca.Location = new System.Drawing.Point(375, 252);
+            this.cmbMarca.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.cmbMarca.Name = "cmbMarca";
+            this.cmbMarca.Size = new System.Drawing.Size(172, 21);
+            this.cmbMarca.TabIndex = 16;
+            this.cmbMarca.Click += new System.EventHandler(this.cmbMarca_Click);
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1110, 660);
+            this.Controls.Add(this.cmbMarca);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txbPrecioM);
             this.Controls.Add(this.txbNombreM);
             this.Controls.Add(this.txbDescripcionM);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txbfiltro);
             this.Controls.Add(this.btnBuscar);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.btnEliminar);
-            this.Controls.Add(this.btnModificar);
-            this.Controls.Add(this.btnAgregar);
+            this.Controls.Add(this.cmbCategoria);
             this.Controls.Add(this.ptbArticulos);
             this.Controls.Add(this.dgvArticulos);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MaximizeBox = false;
             this.Name = "FrmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestor Artículos";
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbArticulos)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -253,10 +265,9 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cmbCategoria;
         private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txbfiltro;
         private System.Windows.Forms.TextBox txbDescripcionM;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox txbNombreM;
@@ -264,6 +275,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cmbMarca;
     }
 }
 

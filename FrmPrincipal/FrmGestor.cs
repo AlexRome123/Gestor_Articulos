@@ -46,7 +46,7 @@ namespace FrmPrincipal
                     cbxMarca.SelectedValue = articulo.Marca.Id;
                     txbNombre.Text = articulo.Nombre;
                     txbDescripcion.Text = articulo.Descripcion;
-                    txbPrecio.Text = articulo.Precio.ToString();
+                    txbPrecio.Text = articulo.Precio.ToString("0.00");
                     txbUrlImagen.Text = articulo.ImagenUrl;
                     cargarImagen(articulo.ImagenUrl);
                     txbCodigo.Text = articulo.Codigo;

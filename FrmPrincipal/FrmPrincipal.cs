@@ -24,7 +24,7 @@ namespace FrmPrincipal
         {
             try
             {
-                cargar();
+                cargar();            
             }
             catch (Exception ex)
             {
@@ -93,6 +93,90 @@ namespace FrmPrincipal
                 MessageBox.Show("Seleccione un Artículo");
             }
 
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+
+            if(dgvArticulos.CurrentRow != null)
+            {
+                try
+                {
+                    DialogResult resultado = MessageBox.Show("¿Seguro deseas eliminar?","Eliminando",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
+                    if(resultado == DialogResult.Yes)
+                    {
+                        ArticulosNegocio datos = new ArticulosNegocio();
+                        Articulos seleccionado = (Articulos)dgvArticulos.CurrentRow.DataBoundItem;
+                        datos.eliminar(seleccionado);
+                        cargar();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un Artículo");
+            }
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            ArticulosNegocio datos = new ArticulosNegocio();
+            Categorias cate = (Categorias)cmbCategoria.SelectedItem;
+            Marcas marc = (Marcas)cmbMarca.SelectedItem;
+            string busq = txbfiltro.Text;
+            try
+            {
+                listaArticulos = datos.buscar(cate, marc, busq);
+                dgvArticulos.DataSource = listaArticulos;
+                dgvArticulos.Columns[0].Visible = false;
+                dgvArticulos.Columns[6].Visible = false;
+                dgvArticulos.Columns["Precio"].DefaultCellStyle.Format = "C2";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                cmbCategoria.SelectedIndex = -1;
+                cmbMarca.SelectedIndex = -1;
+                txbfiltro.Clear();
+            }
+
+        }
+
+        private void cmbCategoria_Click(object sender, EventArgs e)
+        {
+            CategoriasNegocio catNegocio = new CategoriasNegocio();
+            try
+            {
+                cmbCategoria.DataSource = catNegocio.Listar();
+                cmbCategoria.ValueMember = "Id";
+                cmbCategoria.DisplayMember = "Descripcion";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void cmbMarca_Click(object sender, EventArgs e)
+        {
+            MarcasNegocio marcNegocio = new MarcasNegocio();
+            try
+            {
+                cmbMarca.DataSource = marcNegocio.Listar();
+                cmbMarca.ValueMember = "Id";
+                cmbMarca.DisplayMember = "Descripcion";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }

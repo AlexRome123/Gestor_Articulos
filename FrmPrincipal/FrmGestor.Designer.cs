@@ -146,9 +146,12 @@
             this.Controls.Add(this.txbPrecio);
             this.Controls.Add(this.txbDescripcion);
             this.Controls.Add(this.txbNombre);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(768, 489);
+            this.MinimumSize = new System.Drawing.Size(768, 489);
             this.Name = "FrmGestor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Nuevo Artículo";
+            this.Text = "Agregar Artículo";
             this.Load += new System.EventHandler(this.FrmGestor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ptbAriculoG)).EndInit();
             this.ResumeLayout(false);

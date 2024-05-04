@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -97,6 +98,67 @@ namespace Negocio
             finally
             {
                 datos.cerrarConexion();
+            }
+        }
+        public void eliminar(Articulos eliminado)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("delete from ARTICULOS where Id = @id");
+                datos.setearParametro("@id", eliminado.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public List<Articulos> buscar(Categorias categoria, Marcas marca, string busqueda)
+        {
+            List<Articulos>lista = new List<Articulos>();
+            AccesoDatos datos = new AccesoDatos();
+            string consulta = "select a.Id, Codigo,Nombre,a.Descripcion,m.Id IdMarca,m.Descripcion Marca,c.Id IdCategoria,c.Descripcion Categoria,ImagenUrl,Precio from articulos a,MARCAS m,CATEGORIAS c where a.IdMarca = m.Id and a.IdCategoria = c.Id";
+            string categ = "";
+            string marc = "";
+            string busq = " and Nombre like '%" + busqueda + "%'";
+            if (categoria != null)
+            {
+                categ = " and c.Id = "+categoria.Id.ToString();
+            }
+            if (marca != null)
+            {
+                marc = " and m.Id = " + marca.Id.ToString();
+            }
+            try
+            {
+                datos.setearConsulta(consulta + categ + marc + busq);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Articulos aux = new Articulos();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Codigo = (string)datos.Lector["Codigo"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.Marca.Id = (int)datos.Lector["IdMarca"];
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+                    aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
+                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+                    aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }
