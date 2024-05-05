@@ -39,15 +39,18 @@ namespace FrmPrincipal
                 listaArticulos = datos.listar();
                 dgvArticulos.DataSource = listaArticulos;
                 cargarImagen(listaArticulos[0].ImagenUrl);
-                dgvArticulos.Columns[0].Visible = false;
-                dgvArticulos.Columns[6].Visible = false;
-                dgvArticulos.Columns["Precio"].DefaultCellStyle.Format = "C2";
+                prepararDgv();
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.ToString());
             }
+        }
+        private void prepararDgv()
+        {
+            dgvArticulos.Columns[0].Visible = false;
+            dgvArticulos.Columns[6].Visible = false;
+            dgvArticulos.Columns["Precio"].DefaultCellStyle.Format = "C2";
         }
         private void cargarImagen(string imagen)
         {
@@ -89,10 +92,7 @@ namespace FrmPrincipal
                 cargar();
             }
             else
-            {
                 MessageBox.Show("Seleccione un Artículo");
-            }
-
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -117,9 +117,7 @@ namespace FrmPrincipal
                 }
             }
             else
-            {
                 MessageBox.Show("Seleccione un Artículo");
-            }
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -132,9 +130,7 @@ namespace FrmPrincipal
             {
                 listaArticulos = datos.buscar(cate, marc, busq);
                 dgvArticulos.DataSource = listaArticulos;
-                dgvArticulos.Columns[0].Visible = false;
-                dgvArticulos.Columns[6].Visible = false;
-                dgvArticulos.Columns["Precio"].DefaultCellStyle.Format = "C2";
+                prepararDgv();
             }
             catch (Exception ex)
             {
@@ -177,6 +173,11 @@ namespace FrmPrincipal
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

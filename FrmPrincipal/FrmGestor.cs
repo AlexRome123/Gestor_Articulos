@@ -60,27 +60,41 @@ namespace FrmPrincipal
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             ArticulosNegocio negocio = new ArticulosNegocio();
-            try
+            if(txbNombre.Text != "" && txbPrecio.Text != "")
             {
-                if (articulo == null)
-                    articulo = new Articulos();
-                articulo.Categoria = (Categorias)cbxCategoria.SelectedItem;
-                articulo.Marca = (Marcas)cbxMarca.SelectedItem;
-                articulo.Nombre = txbNombre.Text;
-                articulo.Descripcion = txbDescripcion.Text;
-                articulo.Precio = decimal.Parse(txbPrecio.Text);
-                articulo.ImagenUrl = txbUrlImagen.Text;
-                articulo.Codigo = txbCodigo.Text;
+                try
+                {
+                    if (articulo == null)
+                        articulo = new Articulos();
+                    articulo.Categoria = (Categorias)cbxCategoria.SelectedItem;
+                    articulo.Marca = (Marcas)cbxMarca.SelectedItem;
+                    articulo.Nombre = txbNombre.Text;
+                    articulo.Descripcion = txbDescripcion.Text;
+                    articulo.Precio = decimal.Parse(txbPrecio.Text);
+                    articulo.ImagenUrl = txbUrlImagen.Text;
+                    articulo.Codigo = txbCodigo.Text;
 
-                if(articulo.Id !=0)
-                    negocio.modificar(articulo);
-                else
-                    negocio.Agregar(articulo);
-                Close();
+                    if(articulo.Id !=0)
+                        negocio.modificar(articulo);
+                    else
+                        negocio.Agregar(articulo);
+                    Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.ToString());
+                if (txbNombre.Text == "")
+                    txbNombre.BackColor = Color.Red;
+                else
+                    txbNombre.BackColor = Color.White;
+                if (txbPrecio.Text == "")
+                    txbPrecio.BackColor = Color.Red;
+                else
+                    txbPrecio.BackColor = Color.White;
             }
         }
         public void cargarImagen(string imagen)
@@ -104,5 +118,12 @@ namespace FrmPrincipal
             Close();
         }
 
+        private void txbPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

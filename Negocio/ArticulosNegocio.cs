@@ -13,10 +13,15 @@ namespace Negocio
 {
     public class ArticulosNegocio
     {
+        private AccesoDatos datos;
+        public ArticulosNegocio()
+        {
+            datos = new AccesoDatos();
+        }
+
         public List<Articulos> listar()
         {
             List<Articulos> lista = new List<Articulos>();
-            AccesoDatos datos = new AccesoDatos();
             try
             {
                 datos.setearConsulta("select a.Id, Codigo,Nombre,a.Descripcion,m.Id IdMarca,m.Descripcion Marca,c.Id IdCategoria,c.Descripcion Categoria,ImagenUrl,Precio from articulos a,MARCAS m,CATEGORIAS c where a.IdMarca = m.Id and a.IdCategoria = c.Id");
@@ -51,7 +56,6 @@ namespace Negocio
         }
         public void Agregar(Articulos nuevo)
         {
-            AccesoDatos datos = new AccesoDatos();
             try
             {
                 datos.setearConsulta("insert into ARTICULOS (Codigo,Nombre,Descripcion,IdMarca,IdCategoria,ImagenUrl,Precio)values(@codigo,@nombre,@descripcion,@Idmarca,@Idcategoria,@imagen,@Precio)");
@@ -77,7 +81,6 @@ namespace Negocio
         }
         public void modificar(Articulos modificado)
         {
-            AccesoDatos datos = new AccesoDatos();
             try
             {
                 datos.setearConsulta("update ARTICULOS set Codigo = @codigo,Nombre=@nombre,Descripcion=@descripcion,IdMarca=@marca,IdCategoria=@categoria,ImagenUrl=@imagen,Precio=@precio where Id=@id");
@@ -102,7 +105,6 @@ namespace Negocio
         }
         public void eliminar(Articulos eliminado)
         {
-            AccesoDatos datos = new AccesoDatos();
             try
             {
                 datos.setearConsulta("delete from ARTICULOS where Id = @id");
@@ -121,7 +123,6 @@ namespace Negocio
         public List<Articulos> buscar(Categorias categoria, Marcas marca, string busqueda)
         {
             List<Articulos>lista = new List<Articulos>();
-            AccesoDatos datos = new AccesoDatos();
             string consulta = "select a.Id, Codigo,Nombre,a.Descripcion,m.Id IdMarca,m.Descripcion Marca,c.Id IdCategoria,c.Descripcion Categoria,ImagenUrl,Precio from articulos a,MARCAS m,CATEGORIAS c where a.IdMarca = m.Id and a.IdCategoria = c.Id";
             string categ = "";
             string marc = "";
