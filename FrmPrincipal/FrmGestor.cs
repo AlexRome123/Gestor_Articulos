@@ -10,36 +10,34 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dominio;
 using Negocio;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace FrmPrincipal
 {
     public partial class FrmGestor : Form
     {
         private Articulos articulo = null;
+        private OpenFileDialog archivo = null;
         public FrmGestor()
         {
             InitializeComponent();
             cargarImagen("");
+            lblCampoO.Visible = false;
+            lblCampoO2.Visible = false;
         }
         public FrmGestor(Articulos modificado)
         {
             InitializeComponent();
             Text = "Modificar Artículo";
             articulo = modificado;
+            lblCampoO.Visible = false;
+            lblCampoO2.Visible = false;
         }
         private void FrmGestor_Load(object sender, EventArgs e)
         {
-            CategoriasNegocio desplegableCategoria = new CategoriasNegocio();
-            MarcasNegocio desplegableMarca = new  MarcasNegocio();
             try
             {
-                cbxCategoria.DataSource = desplegableCategoria.Listar();
-                cbxMarca.DataSource = desplegableMarca.Listar();
-                cbxCategoria.ValueMember = "Id";
-                cbxCategoria.DisplayMember = "Descripcion";
-                cbxMarca.ValueMember = "Id";
-                cbxMarca.DisplayMember = "Descripcion";
-
+                cargar();
                 if(articulo != null)
                 {
                     cbxCategoria.SelectedValue = articulo.Categoria.Id;
@@ -88,13 +86,13 @@ namespace FrmPrincipal
             else
             {
                 if (txbNombre.Text == "")
-                    txbNombre.BackColor = Color.Red;
+                    lblCampoO.Visible = true;
                 else
-                    txbNombre.BackColor = Color.White;
+                    lblCampoO.Visible = false;
                 if (txbPrecio.Text == "")
-                    txbPrecio.BackColor = Color.Red;
+                    lblCampoO2.Visible = true;
                 else
-                    txbPrecio.BackColor = Color.White;
+                    lblCampoO2.Visible = false;
             }
         }
         public void cargarImagen(string imagen)
@@ -124,6 +122,71 @@ namespace FrmPrincipal
             {
                 e.Handled = true;
             }
+        }
+
+
+        private void cargarItem(bool marca)
+        {
+            var seleccionadoC = cbxCategoria.SelectedIndex;
+            var seleccionadoM = cbxMarca.SelectedIndex;
+            FrmAlta alta = new FrmAlta(marca);
+            alta.ShowDialog();
+            cargar();
+            if (marca)
+            {
+                var ultimo = cbxMarca.Items.Count - 1;
+                cbxMarca.SelectedIndex = ultimo;
+                cbxCategoria.SelectedIndex = seleccionadoC;              
+            }
+            else
+            {
+                var ultimo = cbxCategoria.Items.Count - 1;
+                cbxCategoria.SelectedIndex = ultimo;
+                cbxMarca.SelectedIndex = seleccionadoM;
+            }
+        }
+        private void cargar()
+        {
+            try
+            {
+                CategoriasNegocio desplegableCategoria = new CategoriasNegocio();
+                MarcasNegocio desplegableMarca = new MarcasNegocio();
+
+                cbxCategoria.DataSource = desplegableCategoria.Listar();
+                cbxMarca.DataSource = desplegableMarca.Listar();
+                cbxCategoria.ValueMember = "Id";
+                cbxCategoria.DisplayMember = "Descripcion";
+                cbxMarca.ValueMember = "Id";
+                cbxMarca.DisplayMember = "Descripcion";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnAgregarCate_Click(object sender, EventArgs e)
+        {
+            bool marca = false;
+            cargarItem(marca);
+        }
+
+        private void btnAgregarMarc_Click(object sender, EventArgs e)
+        {
+            bool marca = true;
+            cargarItem(marca);
+        }
+
+        private void btnBuscarImagen_Click(object sender, EventArgs e)
+        {
+            archivo = new OpenFileDialog();
+            archivo.Filter = "jpg|*.jpg;|png|*.png";
+            if (archivo.ShowDialog() == DialogResult.OK)
+            {
+                txbUrlImagen.Text = archivo.FileName;
+                cargarImagen(archivo.FileName);
+            }
+
         }
     }
 }

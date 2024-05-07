@@ -22,9 +22,21 @@ namespace FrmPrincipal
         }
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
+            CategoriasNegocio catNegocio = new CategoriasNegocio();
+            MarcasNegocio marcNegocio = new MarcasNegocio();
+
             try
             {
-                cargar();            
+                cargar();
+                cmbCategoria.DataSource = catNegocio.Listar();
+                cmbCategoria.ValueMember = "Id";
+                cmbCategoria.DisplayMember = "Descripcion";
+                cmbMarca.DataSource = marcNegocio.Listar();
+                cmbMarca.ValueMember = "Id";
+                cmbMarca.DisplayMember = "Descripcion";
+                cmbCategoria.SelectedIndex = -1;
+                cmbMarca.SelectedIndex= -1;
+
             }
             catch (Exception ex)
             {
@@ -145,35 +157,36 @@ namespace FrmPrincipal
 
         }
 
-        private void cmbCategoria_Click(object sender, EventArgs e)
-        {
-            CategoriasNegocio catNegocio = new CategoriasNegocio();
-            try
-            {
-                cmbCategoria.DataSource = catNegocio.Listar();
-                cmbCategoria.ValueMember = "Id";
-                cmbCategoria.DisplayMember = "Descripcion";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
+        //private void cmbCategoria_Click(object sender, EventArgs e)
+        //{
+        //    CategoriasNegocio catNegocio = new CategoriasNegocio();
+        //    try
+        //    {
+        //        cmbCategoria.DataSource = catNegocio.Listar();
+        //        cmbCategoria.ValueMember = "Id";
+        //        cmbCategoria.DisplayMember = "Descripcion";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.ToString());
+        //    }
+        //
+        //}
 
-        private void cmbMarca_Click(object sender, EventArgs e)
-        {
-            MarcasNegocio marcNegocio = new MarcasNegocio();
-            try
-            {
-                cmbMarca.DataSource = marcNegocio.Listar();
-                cmbMarca.ValueMember = "Id";
-                cmbMarca.DisplayMember = "Descripcion";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
+        //private void cmbMarca_Click(object sender, EventArgs e)
+        //{
+        //    MarcasNegocio marcNegocio = new MarcasNegocio();
+        //    try
+        //    {
+        //        cmbMarca.DataSource = marcNegocio.Listar();
+        //        cmbMarca.ValueMember = "Id";
+        //        cmbMarca.DisplayMember = "Descripcion";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.ToString());
+        //    }
+        //}
 
         private void btnSalir_Click(object sender, EventArgs e)
         {

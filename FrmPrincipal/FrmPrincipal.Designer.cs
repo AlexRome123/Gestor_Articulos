@@ -35,12 +35,12 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.txbDescripcionM = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.txbNombreM = new System.Windows.Forms.TextBox();
             this.txbPrecioM = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnSalir = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txbfiltro = new System.Windows.Forms.TextBox();
             this.cmbCategoria = new System.Windows.Forms.ComboBox();
@@ -138,6 +138,17 @@
             this.panel1.Size = new System.Drawing.Size(195, 670);
             this.panel1.TabIndex = 10;
             // 
+            // btnSalir
+            // 
+            this.btnSalir.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.Location = new System.Drawing.Point(45, 600);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(109, 42);
+            this.btnSalir.TabIndex = 5;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
             // txbNombreM
             // 
             this.txbNombreM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -192,17 +203,6 @@
             this.label3.TabIndex = 15;
             this.label3.Text = "Descripción";
             // 
-            // btnSalir
-            // 
-            this.btnSalir.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalir.Location = new System.Drawing.Point(45, 600);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(109, 42);
-            this.btnSalir.TabIndex = 5;
-            this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
             // btnBuscar
             // 
             this.btnBuscar.Location = new System.Drawing.Point(730, 314);
@@ -225,25 +225,21 @@
             // 
             // cmbCategoria
             // 
-            this.cmbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategoria.FormattingEnabled = true;
             this.cmbCategoria.Location = new System.Drawing.Point(195, 316);
             this.cmbCategoria.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbCategoria.Name = "cmbCategoria";
             this.cmbCategoria.Size = new System.Drawing.Size(172, 21);
             this.cmbCategoria.TabIndex = 5;
-            this.cmbCategoria.Click += new System.EventHandler(this.cmbCategoria_Click);
             // 
             // cmbMarca
             // 
-            this.cmbMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMarca.FormattingEnabled = true;
             this.cmbMarca.Location = new System.Drawing.Point(375, 316);
             this.cmbMarca.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbMarca.Name = "cmbMarca";
             this.cmbMarca.Size = new System.Drawing.Size(167, 21);
             this.cmbMarca.TabIndex = 16;
-            this.cmbMarca.Click += new System.EventHandler(this.cmbMarca_Click);
             // 
             // label4
             // 
