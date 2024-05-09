@@ -61,7 +61,7 @@
             this.txbNombre.Multiline = true;
             this.txbNombre.Name = "txbNombre";
             this.txbNombre.Size = new System.Drawing.Size(300, 31);
-            this.txbNombre.TabIndex = 0;
+            this.txbNombre.TabIndex = 2;
             // 
             // txbDescripcion
             // 
@@ -71,7 +71,7 @@
             this.txbDescripcion.Multiline = true;
             this.txbDescripcion.Name = "txbDescripcion";
             this.txbDescripcion.Size = new System.Drawing.Size(300, 89);
-            this.txbDescripcion.TabIndex = 1;
+            this.txbDescripcion.TabIndex = 6;
             // 
             // txbPrecio
             // 
@@ -81,7 +81,7 @@
             this.txbPrecio.Multiline = true;
             this.txbPrecio.Name = "txbPrecio";
             this.txbPrecio.Size = new System.Drawing.Size(300, 31);
-            this.txbPrecio.TabIndex = 2;
+            this.txbPrecio.TabIndex = 3;
             this.txbPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbPrecio_KeyPress);
             // 
             // cbxCategoria
@@ -92,7 +92,7 @@
             this.cbxCategoria.Location = new System.Drawing.Point(57, 94);
             this.cbxCategoria.Name = "cbxCategoria";
             this.cbxCategoria.Size = new System.Drawing.Size(300, 24);
-            this.cbxCategoria.TabIndex = 3;
+            this.cbxCategoria.TabIndex = 0;
             // 
             // cbxMarca
             // 
@@ -102,7 +102,7 @@
             this.cbxMarca.Location = new System.Drawing.Point(57, 191);
             this.cbxMarca.Name = "cbxMarca";
             this.cbxMarca.Size = new System.Drawing.Size(300, 24);
-            this.cbxMarca.TabIndex = 4;
+            this.cbxMarca.TabIndex = 1;
             // 
             // txbUrlImagen
             // 
@@ -123,7 +123,7 @@
             this.txbCodigo.Multiline = true;
             this.txbCodigo.Name = "txbCodigo";
             this.txbCodigo.Size = new System.Drawing.Size(300, 31);
-            this.txbCodigo.TabIndex = 6;
+            this.txbCodigo.TabIndex = 4;
             // 
             // ptbAriculoG
             // 
@@ -140,7 +140,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(223, 606);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(110, 33);
-            this.btnAceptar.TabIndex = 8;
+            this.btnAceptar.TabIndex = 7;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -151,7 +151,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(417, 606);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(104, 33);
-            this.btnCancelar.TabIndex = 9;
+            this.btnCancelar.TabIndex = 8;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);

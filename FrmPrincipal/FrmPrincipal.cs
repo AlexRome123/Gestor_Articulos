@@ -22,21 +22,10 @@ namespace FrmPrincipal
         }
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
-            CategoriasNegocio catNegocio = new CategoriasNegocio();
-            MarcasNegocio marcNegocio = new MarcasNegocio();
-
             try
             {
                 cargar();
-                cmbCategoria.DataSource = catNegocio.Listar();
-                cmbCategoria.ValueMember = "Id";
-                cmbCategoria.DisplayMember = "Descripcion";
-                cmbMarca.DataSource = marcNegocio.Listar();
-                cmbMarca.ValueMember = "Id";
-                cmbMarca.DisplayMember = "Descripcion";
-                cmbCategoria.SelectedIndex = -1;
-                cmbMarca.SelectedIndex= -1;
-
+                cargarFiltro();
             }
             catch (Exception ex)
             {
@@ -92,6 +81,7 @@ namespace FrmPrincipal
             FrmGestor gestor = new FrmGestor();
             gestor.ShowDialog();
             cargar();
+            cargarFiltro();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -102,6 +92,7 @@ namespace FrmPrincipal
                 FrmGestor gestor = new FrmGestor(seleccionado);
                 gestor.ShowDialog();
                 cargar();
+                cargarFiltro();
             }
             else
                 MessageBox.Show("Seleccione un Artículo");
@@ -156,38 +147,26 @@ namespace FrmPrincipal
             }
 
         }
-
-        //private void cmbCategoria_Click(object sender, EventArgs e)
-        //{
-        //    CategoriasNegocio catNegocio = new CategoriasNegocio();
-        //    try
-        //    {
-        //        cmbCategoria.DataSource = catNegocio.Listar();
-        //        cmbCategoria.ValueMember = "Id";
-        //        cmbCategoria.DisplayMember = "Descripcion";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.ToString());
-        //    }
-        //
-        //}
-
-        //private void cmbMarca_Click(object sender, EventArgs e)
-        //{
-        //    MarcasNegocio marcNegocio = new MarcasNegocio();
-        //    try
-        //    {
-        //        cmbMarca.DataSource = marcNegocio.Listar();
-        //        cmbMarca.ValueMember = "Id";
-        //        cmbMarca.DisplayMember = "Descripcion";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.ToString());
-        //    }
-        //}
-
+        private void cargarFiltro()
+        {
+            CategoriasNegocio catNegocio = new CategoriasNegocio();
+            MarcasNegocio marcNegocio = new MarcasNegocio();
+            try
+            {
+                cmbCategoria.DataSource = catNegocio.Listar();
+                cmbCategoria.ValueMember = "Id";
+                cmbCategoria.DisplayMember = "Descripcion";
+                cmbMarca.DataSource = marcNegocio.Listar();
+                cmbMarca.ValueMember = "Id";
+                cmbMarca.DisplayMember = "Descripcion";
+                cmbCategoria.SelectedIndex = -1;
+                cmbMarca.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();

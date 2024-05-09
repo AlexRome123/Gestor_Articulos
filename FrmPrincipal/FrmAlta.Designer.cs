@@ -60,7 +60,7 @@
             this.btnAceptar2.Location = new System.Drawing.Point(46, 116);
             this.btnAceptar2.Name = "btnAceptar2";
             this.btnAceptar2.Size = new System.Drawing.Size(93, 34);
-            this.btnAceptar2.TabIndex = 2;
+            this.btnAceptar2.TabIndex = 1;
             this.btnAceptar2.Text = "Aceptar";
             this.btnAceptar2.UseVisualStyleBackColor = true;
             this.btnAceptar2.Click += new System.EventHandler(this.btnAceptar2_Click);
@@ -71,7 +71,7 @@
             this.btnCancelar2.Location = new System.Drawing.Point(193, 116);
             this.btnCancelar2.Name = "btnCancelar2";
             this.btnCancelar2.Size = new System.Drawing.Size(94, 34);
-            this.btnCancelar2.TabIndex = 3;
+            this.btnCancelar2.TabIndex = 2;
             this.btnCancelar2.Text = "Cancelar";
             this.btnCancelar2.UseVisualStyleBackColor = true;
             this.btnCancelar2.Click += new System.EventHandler(this.btnCancelar2_Click);
